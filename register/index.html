@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>registration</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Kaisei+Decol&display=swap" rel="stylesheet">
+<!-- Include JS File Here -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="registration.js"></script>
+
+
+
+
+</head>
+<body>
+	<div class="container">
+		<h1 class="heading">Sign Up Form</h1>
+		<form action="https://kristenloniwright.github.io" class="form" id="form">
+			<div class="form__group">
+				<input type="text" class="form__input" id="name" value="" autocomplete="off">
+				<label for="name" class="form__label">Username</label>
+			</div>
+			<div class="form__group">
+				<input type="password" class="form__input" id="password" value="" autocomplete="off">
+				<label for="password" class="form__label">Password</label>
+			</div>
+			<div class="form__group">
+				<input type="password" class="form__input" value="" id="re_password" autocomplete="off">
+				<label for="re_password" class="form__label">Confirm Password</label>
+			</div>
+			<div class="form__group">
+				<input type="email" class="form__input" id="email" value="" autocomplete="off">
+				<label for="email" class="form__label">Email</label>
+			</div>
+			<div class="form__error" id="error"></div>
+			 <button class="form__submit-btn" type="submit">Send</button>
+		</form>
+	</div>
+	
+	
+</body>
+</html>
