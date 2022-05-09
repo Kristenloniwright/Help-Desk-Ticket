@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper 
+https://infotechwar.com/it-solutions/firebase-web-authentication-with-email-and-password/
+
+YouTube
+https://www.youtube.com/watch?v=qYER6hAgJik&t=324s
+
+
+-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="database.js"></script>
+</head>
+
+<body >
+  <section class="vh-100" style="background-color: #508bfc;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 35% 5%;">
+              <div class="card-body p-5 text-center">
+    
+
+                <h5 class="display-6 mb-5 ">Registration form</h5>
+
+                <div  class="row g-2 mb-1">
+                  <div class="col-6 mb-3">
+                    <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="First name" name="firstname">
+                  </div>
+                  <div class="col-6 mb-3">
+                    <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Last name" name="lastname">
+                  </div>
+                </div>
+
+                <div class="mb-1">
+                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" name="Email">
+                  <div id="emailHelp" class="form-text mb-3">We'll never share your email with anyone else.</div>
+                </div>
+
+                <div class=" mb-3">
+                  <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder=" Create a Username" name="username">
+                </div>
+                <div  class="row g-2 mb-1 ">
+                  <div class="col-6 mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                  </div>
+                  <div class="col-6 mb-3">
+                    <input type="password" class="form-control" id="password2" placeholder=" Confirm Password" name="password2">
+                  </div>
+                </div>
+                <div class="col-auto mb-3">
+                    <span id="passwordHelpInline" class="form-text">
+                      Must be 8-20 characters long.
+                    </span>
+                  </div>
+    
+                <button class="btn btn-primary btn-lg btn-block" type="submit" id="signup" name="sign_sumbit" value="Sign Up">Sign Up</button>
+    
+                <hr class="my-4">
+                <div class="pt-3 ">
+                  <p>I am a member <a href="login.html"> Sign In</a></p>
+                </div>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</body>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js";
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAKtJibiy8I73xxMhXAcDeJBrlYROzEN2I",
+    authDomain: "ticketsystem-60967.firebaseapp.com",
+    databaseURL: "https://ticketsystem-60967-default-rtdb.firebaseio.com",
+    projectId: "ticketsystem-60967",
+    storageBucket: "ticketsystem-60967.appspot.com",
+    messagingSenderId: "23198086031",
+    appId: "1:23198086031:web:0fc63462458fcae8ee91fa"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+
+  
+signup.addEventListener('click', (e) =>{
+
+  var firstname = document.getElementById('firstname').value;
+  var lastname = document.getElementById('lastname').value;
+  var email = document.getElementById('email').value;
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+  var password2 = document.getElementById('password2').value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+     // Signed in 
+      const user = userCredential.user;
+
+      set(ref(database, 'users/' + user.uid),{
+          username: username,
+          firstname: firstname,
+          lastname:  lastname,
+          email: email
+
+      })
+      alert('user created!');
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      alert(errorMessage);
+    // ..
+    });
+  
+});
+</script>
+</html>

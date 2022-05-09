@@ -73,21 +73,6 @@
           </header>
           <!--Main Navigation-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <!--Main layout-->
           <main style="margin-top: 58px;">
             <div class="container pt-4">
@@ -95,24 +80,24 @@
                   <h1 class="ticket-heading display-4">Create a Ticket</h1>
                   <form class="ticket-form">
                      <!-- 2 column grid layout with text inputs for the first and last names -->
-                     <div class="row g-3 mb-2">
-                       <div class="col">
-                         <div class="form-outline">
-                           <input type="text" id="firstname" class="form-control" placeholder="First name"/>
+             
+                   
+                         <div class="form-outline mb-2">
+                           <input type="text" id="fullname" class="form-control" placeholder="Full Name"/>
                          </div>
-                       </div>
-                       <div class="col">
-                         <div class="form-outline">
-                           <input type="text" id="lastname" class="form-control" placeholder="Last name" />
-                         </div>
-                       </div>
-                     </div>
+                    
+                     
                    
                      <!-- Email input -->
                      <div class="form-outline mb-2">
                        <input type="email" id="email" class="form-control" placeholder="Email Address" />
                      </div>
                    
+                      <!-- Department input -->
+                      <div class="form-outline mb-2">
+                        <input type="text" id="department" class="form-control" placeholder="Department" />
+                      </div>
+
                      <!-- Subject input -->
                      <div class="form-outline mb-4">
                        <input type="type" id="subject" class="form-control" placeholder="Subject" />
@@ -136,4 +121,57 @@
    </section>
 
 </body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAKtJibiy8I73xxMhXAcDeJBrlYROzEN2I",
+    authDomain: "ticketsystem-60967.firebaseapp.com",
+    databaseURL: "https://ticketsystem-60967-default-rtdb.firebaseio.com",
+    projectId: "ticketsystem-60967",
+    storageBucket: "ticketsystem-60967.appspot.com",
+    messagingSenderId: "23198086031",
+    appId: "1:23198086031:web:0fc63462458fcae8ee91fa"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  //When User Clicks submit events will occur
+  submit.addEventListener('click', (e) =>{
+
+    // get the user values which the user type
+    var fullname = document.getElementById('fullname').value;
+    var email = document.getElementById('email').value;
+    var department = document.getElementById('department').value;
+    var subject = document.getElementById('subject').value;
+    var issue = document.getElementById('issue').value;
+
+    function writeUserData(userId, fullname, email, department) {
+  const db = getDatabase();
+
+  set(ref(db, 'tickets/' + userId), {
+      Fullname: fullname,
+        Email: email,
+        Department: department,
+        Subject: subject,
+        Issue: issue
+  });
+}
+
+
+   
+
+
+  });
+
+</script>
+
+
 </html>
