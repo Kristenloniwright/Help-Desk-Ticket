@@ -122,6 +122,9 @@
 
 </body>
 <script type="module">
+
+
+
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
   import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
@@ -144,8 +147,9 @@
   const database = getDatabase(app);
 
   //When User Clicks submit events will occur
-  submit.addEventListener('click', function writeUserData((userId, fullname, email, department, subject){
-
+   
+  document.getElementById("submit").addEventListener('click', function writeUserData(fullname, email, department, subject){
+    
     // get the user values which the user type
     var fullname = document.getElementById('fullname').value;
     var email = document.getElementById('email').value;
@@ -153,6 +157,8 @@
     var subject = document.getElementById('subject').value;
     var issue = document.getElementById('issue').value;
      
+    console.log("test"); 
+
   set(ref(database, 'tickets/'), {
         Fullname: fullname,
         Email: email,
@@ -160,11 +166,10 @@
         Subject: subject,
         Issue: issue
   });
-}
+
 
 
    
-
 
   });
 
