@@ -144,7 +144,7 @@
   const database = getDatabase(app);
 
   //When User Clicks submit events will occur
-  submit.addEventListener('click', (e) =>{
+  submit.addEventListener('click', function writeUserData((userId, fullname, email, department, subject){
 
     // get the user values which the user type
     var fullname = document.getElementById('fullname').value;
@@ -152,12 +152,9 @@
     var department = document.getElementById('department').value;
     var subject = document.getElementById('subject').value;
     var issue = document.getElementById('issue').value;
-
-    function writeUserData(userId, fullname, email, department) {
-  const db = getDatabase();
-
-  set(ref(db, 'tickets/' + userId), {
-      Fullname: fullname,
+     
+  set(ref(database, 'tickets/'), {
+        Fullname: fullname,
         Email: email,
         Department: department,
         Subject: subject,
