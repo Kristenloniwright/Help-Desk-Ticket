@@ -148,7 +148,7 @@
 
   //When User Clicks submit events will occur
    
-  document.getElementById("submit").addEventListener('click', function writeUserData(fullname, email, department, subject){
+  document.getElementById("submit").addEventListener('click', function writeUserData(userId, fullname, email, department, subject){
     
     // get the user values which the user type
     var fullname = document.getElementById('fullname').value;
@@ -159,7 +159,7 @@
      
     console.log("test"); 
 
-  set(ref(database, 'tickets/'), {
+  set(ref(database, 'tickets/' + userId), {
         Fullname: fullname,
         Email: email,
         Department: department,
